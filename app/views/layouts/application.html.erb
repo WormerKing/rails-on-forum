@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RailsOnForum</title>
+    <title>Rails On Forum</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,28 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="conteiner">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">Rails on Forum</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <!--a class="nav-link active" aria-current="page" href="#">Giriş yap</a-->
+                <%= link_to "Giriş Yap","#",class:"nav-link"%>
+              </li>
+              <li class="nav-item">
+                <!--a class="nav-link" href="">Features</a-->
+                <%= link_to "Kaydol",register_path,class:"nav-link"%>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <%= yield%>
+    </div>
   </body>
 </html>
