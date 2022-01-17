@@ -1,72 +1,50 @@
-<%= form_for @user do |f|%>
-	<div class="row">
-		<% if @user.errors.any?%>
-			<div class="col-6 alert alert-danger">
-				<h2>Lütfen aşağıdaki hataları düzeltip tekrar deneyin</h2>
-				<ul>
-					<% @user.errors.full_messages.uniq.each do |error|%>
-						<li><%= error%></li>
-					<%end%>
-				</ul>
+<div class="col-4 ortala border">
+	<%= form_for @user do |f|%>
+		<div class="row">
+			<div class="col">
+				<%= f.text_field :first_name,class:"form-control",placeholder:"First Name",'aria-label' => "First Name"%>
+			</div>
+			<div class="col">
+				<%= f.text_field :last_name,class:"form-control",placeholder:"Last Name",'aria-label' => "Last Name"%>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<!-- Buraya username alanı gelecek -->
+				<%= f.text_field :username,class:"form-control",placeholder:"Username",'aria-label' => "Username"%>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<!-- Buraya email alanı gelecek -->
+				<%= f.email_field :email,class:"form-control",placeholder:"Email",'aria-label' =>"Email"%>
+			</div>
+		</div>
+		<% unless params[:action] == "edit" || params[:action] == "show"%>
+			<div class="row">
+				<div class="col">
+					<!-- Buraya password alanı gelecek -->
+					<%= f.password_field :password,class:"form-control",placeholder:"Password",'aria-label' => "Password"%>
+					<div id="validationServerPasswordFeedback" class="invalid-feedback">
+        				This area is required
+      				</div>
+				</div>
+				<div class="col">
+					<!-- Buraya password_digest alanı gelecek -->
+					<%= f.password_field :password_confirmation,class:"form-control",placeholder:"Password Confirmation",'aria-label' => "Password Confirmation"%>
+				</div>
 			</div>
 		<%end%>
-		<div class="col-6 alert alert-primary" style="float:right;">
-			<h2>Buralarda yeni misin?</h2>
-			<p>O halde yeni bir hesap oluştur ve bu büyük aileye katıl</p>
-			<ul>
-				<li>Takıldığın konular ile ilgili sorular sor.</li>
-				<li>Diğerlerinin sorularını cevapla.</li>
-				<li>İlgi alanlarını takip et ve tartışmalara katıl.</li>
-			</ul>
-		</div>
+		<%= f.submit "Kaydol",class:"btn btn-primary button float-right"%>
+	<%end%>
+</div>
+<% if @user.errors.any?%>
+	<div class="col-4 alert alert-danger">
+		<h2>Lütfen aşağıdaki hataları düzeltip tekrar deneyin</h2>
+		<ul>
+			<% @user.errors.full_messages.uniq.each do |error|%>
+				<li><%= error%></li>
+			<%end%>
+		</ul>
 	</div>
-	<div class="row g-3 align-items-center">
-		<div class="col-auto">
-			<%= f.label :first_name,class:"col-form-label",for:"inputFirst_Name6"%>
-		</div>
-		<div class="col-auto">
-			<%= f.text_field :first_name,id:"inputFirst_Name6",class:"form-control"%>
-		</div>
-	</div>
-	<div class="row g-3 align-items-center">
-		<div class="col-auto">
-			<%= f.label :last_name,class:"col-form-label",for:"inputFirst_Name6"%>
-		</div>
-		<div class="col-auto">
-			<%= f.text_field :last_name,id:"inputFirst_Name6",class:"form-control"%>
-		</div>
-	</div>
-	<div class="row g-3 align-items-center">
-		<div class="col-auto">
-			<%= f.label :username,class:"col-form-label",for:"inputFirst_Name6"%>
-		</div>
-		<div class="col-auto">
-			<%= f.text_field :username,id:"inputFirst_Name6",class:"form-control"%>
-		</div>
-	</div>
-	<div class="row g-3 align-items-center">
-		<div class="col-auto">
-			<%= f.label :email,class:"col-form-label",for:"inputFirst_Name6"%>
-		</div>
-		<div class="col-auto">
-			<%= f.email_field :email,id:"inputFirst_Name6",class:"form-control"%>
-		</div>
-	</div>
-	<div class="row g-3 align-items-center">
-		<div class="col-auto">
-			<%= f.label :password,class:"col-form-label",for:"inputFirst_Name6"%>
-		</div>
-		<div class="col-auto">
-			<%= f.password_field :password,id:"inputFirst_Name6",class:"form-control"%>
-		</div>
-	</div>
-	<div class="row g-3 align-items-center">
-		<div class="col-auto">
-			<%= f.label :password_confirmation,class:"col-form-label",for:"inputFirst_Name6"%>
-		</div>
-		<div class="col-auto">
-			<%= f.password_field :password_confirmation,id:"inputFirst_Name6",class:"form-control"%>
-		</div>
-	</div>
-	<%= f.submit "Kaydol",class:"btn btn-primary"%>
 <%end%>

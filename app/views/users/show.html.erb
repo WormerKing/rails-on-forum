@@ -1,6 +1,11 @@
-<%= stylesheet_link_tag "user_show"%>
-<div class="row">
-	<div class="col-12 bg-primary text-warning div1" style="text-align:center;">
-		<%= flash.notice%>
-	</div>
-</div>
+<% content_for(:profile_content) do %>
+	<h2><%= page.capitalize%></h2>
+
+	<% if @data.blank? %>
+		<p>Kullanıcıya ait <%= page%> bulunmamaktadır</p>
+	<%else%>
+		<% @data.each do |data|%>
+			<div><%= data%></div>
+		<%end%>
+	<%end%>
+<%end%>

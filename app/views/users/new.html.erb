@@ -1,6 +1,18 @@
+<%= stylesheet_link_tag "new_user"%>
 <div class="row">
 	<div class="col-12">
 		<h2>Aramıza katılın!</h2>
-		<%= render "form"%>
+		<div class="row">
+			<div class="col-4 alert alert-primary" style="float:right;">
+				<h2>Buralarda yeni misin?</h2>
+				<p>O halde yeni bir hesap oluştur ve bu büyük aileye katıl</p>
+				<ul>
+					<li>Takıldığın konular ile ilgili sorular sor.</li>
+					<li>Diğerlerinin sorularını cevapla.</li>
+					<li>İlgi alanlarını takip et ve tartışmalara katıl.</li>
+				</ul>
+			</div>
+			<%= render "form"%>
+		</div>
 	</div>
 </div>
