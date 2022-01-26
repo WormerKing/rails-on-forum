@@ -1,12 +1,11 @@
 class UsersController < ApplicationController
+	before_action :select_user,only: %i[ update edit show destroy]
 	rescue_from ActiveRecord::RecordNotFound,with: :load_error_page
 	def new
 		@user = User.new
 	end
 	
-	def update
-		@user = User.find(params[:id])
-
+	def update		
 		update_params = user_params
 
 		if update_params.has_key?(:password)
@@ -20,13 +19,18 @@ class UsersController < ApplicationController
 			render :edit,layout:"profile"
 		end
 	end
+	
 	def edit
-		@user = User.find(params[:id])
 		render layout:"profile"
 	end
 
 	def create
+		@id = (User.last.id + 1) unless User.last == nil
+		@id ||= 1
+
 		@user = User.new(user_params)
+
+		@user.id = @id
 
 		if @user.save
 			flash[:notice] = "Kayıt başarıyla eklendi :)"
@@ -37,7 +41,6 @@ class UsersController < ApplicationController
 	end
 	
 	def show
-		@user = User.find(params[:id])
 		@data = []
 
 		if params[:sayfa]
@@ -48,18 +51,23 @@ class UsersController < ApplicationController
 	end
 
 	def destroy
-		@user = User.find(params[:id])
-
 		@user.destroy
-
-		redirect_to(register_path)
+		flash[:warning] = "Hesabınız başarıyla silindi"
+		redirect_to register_path
 	end
+
 	private
-	def user_params()
+	def user_params
 		params.require(:user).permit!
 	end
-	private
 	def load_error_page
 		render file:"#{Rails.root}/public/404.html",status: :not_found
+	end
+	def select_user 
+		@user = User.find_by_username(params[:id])
+
+		unless @user
+			render file:"#{Rails.root}/public/404.html",status: :not_found
+		end
 	end
 end

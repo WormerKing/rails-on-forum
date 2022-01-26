@@ -1,0 +1,10 @@
+<style>
+	.ortala {
+		text-align: center;
+	}
+</style>
+<% flash.each do |type,msg|%>
+	<div class="alert alert-<%= flash_class(type.to_sym)%> ortala">
+		<%= msg%>
+	</div>
+<%end%>
