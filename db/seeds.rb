@@ -1,10 +1,6 @@
-user = User.new do |user|
-	user.id = 1
-	user.username = "moonknight"
-	user.first_name = "Emila"
-	user.last_name = "Clarke"
-	user.email = "tuncaydinler@hotmail.com"
-	user.password_digest = "PythonTuncay1"
-end
+forums = ['Ruby ve ailesi','Proglamlama temelleri','Basit HTML/CSS','Genel konular','Tasarım genel']
 
-user.save
+forums.each do |forum|
+	Forum.find_or_create_by(name:forum)
+	puts "-- #{forum} formu oluşturuldu"
+end
