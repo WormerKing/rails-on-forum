@@ -33,6 +33,7 @@ class UsersController < ApplicationController
 		@user.id = @id
 
 		if @user.save
+			login(@user)
 			flash[:notice] = "Kayıt başarıyla eklendi :)"
 			redirect_to(@user)
 		else
