@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 	before_action :select_user,only: %i[ update edit show destroy]
+	before_action :allowed?,only: %i[ create edit destroy ]
 	rescue_from ActiveRecord::RecordNotFound,with: :load_error_page
 	def new
 		@user = User.new
@@ -69,6 +70,15 @@ class UsersController < ApplicationController
 
 		unless @user
 			render file:"#{Rails.root}/public/404.html",status: :not_found
+		end
+		@user
+	end
+	def allowed?
+		user = select_user
+
+		unless current_user == user
+			flash[:error] = "Bunu yapmaya yetkiniz yok"
+			redirect_to profile_path(user)
 		end
 	end
 end

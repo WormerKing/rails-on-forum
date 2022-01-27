@@ -13,8 +13,10 @@
 					<div class="btn-group" role="group" aria-label="Basic example">
 						<%= link_to "Konular",user_path(@user,sayfa:"konular"),class:"btn btn-secondary text-dark"%>
 						<%= link_to "Yorumlar",user_path(@user,sayfa:"yorumlar"),class:"btn btn-secondary text-dark"%>
-						<%= link_to "Profilimi Düzenle",edit_profile_path(@user),class:"btn btn-secondary text-dark"%>
-						<%= link_to "Hesabımı sil",@user,class:"btn btn-danger text-dark",data:{confirm:"Emin misiniz bu işlem geri alınamaz!"},method: :delete%>
+						<% if current_user == @user%>
+							<%= link_to "Profilimi Düzenle",edit_profile_path(@user),class:"btn btn-secondary text-dark"%>
+							<%= link_to "Hesabımı sil",@user,class:"btn btn-danger text-dark",data:{confirm:"Emin misiniz bu işlem geri alınamaz!"},method: :delete%>
+						<%end%>
 					</div>
 				</div>
 			</div>
