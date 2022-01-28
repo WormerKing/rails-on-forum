@@ -6,5 +6,6 @@ class ForumsController < ApplicationController
   def show
     @forumlar = Forum.all
     @forum = Forum.find(params[:id])
+    @konular = Topic.where(params[:id])
   end
 end

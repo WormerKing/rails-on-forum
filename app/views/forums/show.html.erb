@@ -2,7 +2,9 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<h1><%= @forum.name %> Forumu</h1>
-			<p>İlgili konular burada gösterilir</p>
+			<% @konular.each do |konu|%>
+				<p><%= konu.title%><%# link_to konu.title,konu%></p>
+			<%end%>
 		</div>
 	</div>
 <%end%>
