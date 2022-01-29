@@ -5,8 +5,10 @@
 			<% if signed_in?%>	
 				<%= link_to "Yeni konu",new_forum_topic_path(@forum),class:"btn btn-secondary"%>
 			<%end%>
-			<% @konular.each do |konu|%>
-				<p><%= link_to konu.title,topic_path(konu)%></p>
+			<% if @forum.topic.any?%>
+				<%= render @forum.topic%>
+			<%else%>
+				<p>Henüz hiç konu oluşturulmamış</p>
 			<%end%>
 		</div>
 	</div>

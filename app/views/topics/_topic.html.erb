@@ -1,0 +1,19 @@
+<div class="row">
+	<div class="col-sm-10">
+		<h5><%= link_to topic.title,topic%></h5>
+		<p><%= truncate topic.body,lenght:50%>
+		<small class="details">
+			<% unless params[:action] == "show" && params[:controller] == "forums"%>
+				<span class="forum-name">
+					<%= link_to topic.forum.name,topic.forum%>
+				</span>
+			<%end%>
+			<%= link_to_unless_current topic.user.username,profile_path(topic.user)%> Tarafından
+			<%= time_ago_in_words topic.created_at%> önce gönderildi
+		</small>
+		<div class="col-sm-2 text-center">
+			<strong>n</strong><br>Yanıt
+		</div>
+	</div>
+</div>
+<hr>

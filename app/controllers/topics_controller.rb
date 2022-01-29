@@ -4,6 +4,7 @@ class TopicsController < ApplicationController
   end 
 
   def index
+    @forums = Forum.all
     @topics = Topic.all
   end
 
