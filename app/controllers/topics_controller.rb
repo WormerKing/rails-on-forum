@@ -33,8 +33,20 @@ class TopicsController < ApplicationController
       render :new
     end
   end
+
+  def destroy
+    @topic = Topic.find(params[:id])
+    @topic.destroy
+
+    flash[:notice] = "Konu başarıyla silindi"
+    redirect_to "/"
+  end
+
   private
   def topic_params
     params.require(:topic).permit(:title,:body)
+  end
+  def set_topic
+    @topic = Topic.find(params[:id])
   end
 end

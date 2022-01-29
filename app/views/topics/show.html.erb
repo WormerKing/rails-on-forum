@@ -1,4 +1,21 @@
 <div class="row">
 	<h1><%= @topic.title%></h1>
 	<p><%= @topic.body%></p>
+	<small class="details">
+		<span class="forum-name">
+			<%= link_to @topic.forum.name,@topic.forum%>
+		</span>
+		<%= link_to_unless_current @topic.user.username,profile_path(@topic.user)%>
+		Tarafından <%= time_ago_in_words @topic.created_at%> önce gönderildi.
+	</small>
+</div>
+<div class="row">
+	<%= link_to "Yorum ekle","#",class:"btn btn-primary" if signed_in?%>
+	<% if current_user == @topic.user%>
+		<%= link_to "Düzenle",edit_topic_path(@topic),class:"btn btn-warning"%>
+		<%= link_to "Sil",@topic,class:"btn btn-danger",method: :delete,data:{confirm:"Emin misiniz,bu işlem geri alınamaz"}%>
+	<%end%>
+</div>
+<div class="row">
+	<h2>Yorumlar burada listelenecek</h2>
 </div>
