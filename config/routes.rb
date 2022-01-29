@@ -1,17 +1,26 @@
 Rails.application.routes.draw do
-  root "forums#index"
-
-  get "/forumlar",to: "forums#index",as: :forums
-  get "/forumlar/:id",to: "forums#show",as: :forum
-
-  resource :session,only:%i[ new create destroy ]
   get "/oturum_ac",to: "sessions#new",as: :login
   delete "/oturumu_kapat",to: "sessions#destroy",as: :logout
 
+  resource :session,only: :create
+
+  resources :forums,only:%i[ index show ],path:"forumlar" do
+    resources :topics,only:%i[ new create ],path:"konular",path_names:{new:"yeni"}
+  end
+
+  resources :topics,except:%i[index new create],path:"konular",path_names:{edit:"düzenle"}
+
+  resources :users,only:%i[ create update destroy]
+
+  #get "/forumlar",to: "forums#index",as: :forums
+  #get "/forumlar/:id",to: "forums#show",as: :forum
+
   get "/users/new",to: redirect("/kaydol")
   get "/users",to: redirect("/kaydol")
-  resources :users
+
   get "/kaydol",to:"users#new",as: :register
   get "/:id",to: "users#show",as: :profile
-  get "/:id/edit",to: "users#edit",as: :edit_profile
+  get "/:id/düzenle",to: "users#edit",as: :edit_profile
+
+  root "forums#index"
 end

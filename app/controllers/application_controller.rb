@@ -12,5 +12,12 @@ class ApplicationController < ActionController::Base
 		current_user
 	end
 
+	def validate_permission!
+		unless current_user == user
+			flash[:error] = "Bu işlemi gerçekleştirebilmek için oturum açmalısınız."
+			redirect_to login_path
+		end
+	end
+
 	helper_method :current_user,:signed_in?
 end
