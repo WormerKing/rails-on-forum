@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:session][:password])
       login(user)
-      redirect_to profile_path(user),notice:"Başarıyla giriş yapıldı"
+      redirect_to "/",notice:"Başarıyla giriş yapıldı"
     else
       flash[:error] = "Kullanıcı adı/parola hatalı"
       redirect_to login_path
@@ -17,6 +17,6 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to login_path,notice:"Oturumunuz sonlandırıldı"
+    redirect_to "/",notice:"Oturumunuz sonlandırıldı"
   end
 end

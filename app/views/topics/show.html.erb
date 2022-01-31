@@ -10,12 +10,17 @@
 	</small>
 </div>
 <div class="row">
-	<%= link_to "Yorum ekle","#",class:"btn btn-primary" if signed_in?%>
+	<%= link_to "Yorum ekle",new_topic_comment_path(@topic),class:"btn btn-primary" if signed_in?%>
 	<% if current_user == @topic.user%>
 		<%= link_to "Düzenle",edit_topic_path(@topic),class:"btn btn-warning"%>
 		<%= link_to "Sil",@topic,class:"btn btn-danger",method: :delete,data:{confirm:"Emin misiniz,bu işlem geri alınamaz"}%>
 	<%end%>
 </div>
 <div class="row">
-	<h2>Yorumlar burada listelenecek</h2>
+	<% @topic.comments.each do |comment|%>
+		<div class="row">
+			<p><%= comment.body%></p>
+			<hr>
+		</div>
+	<%end%>
 </div>

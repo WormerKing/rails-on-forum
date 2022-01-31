@@ -1,0 +1,22 @@
+<div class="row">
+	<%= form_for [@topic,@comment] do |form|%>
+		<div class="col-lg-6">
+			<div class="col-lg-12">
+				<%= form.text_area :body,class:"form-control",placeholder:"Yorumunuz",style:"max-height:100px;min-height:100px;"%>
+			</div>
+			<div class="col-lg-12">
+				<%= form.submit "Gönder",class:"btn btn-primary"%>
+			</div>
+		</div>
+		<% if @comment.errors.any?%>
+			<div class="col-lg-12 alert alert-danger">
+				<p>Lütfen aşağıdki hatalrı düzeltip tekrar deneyin</p>
+				<ul>
+					<% @comment.errors.full_messages.each do |error|%>
+						<li><%= error%></li>
+					<%end%>
+				</ul>
+			</div>
+		<%end%>
+	<%end%>
+</div>

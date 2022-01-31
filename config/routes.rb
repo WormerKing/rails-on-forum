@@ -8,7 +8,10 @@ Rails.application.routes.draw do
     resources :topics,only:%i[ new create ],path:"konular",path_names:{new:"yeni"}
   end
 
-  resources :topics,except:%i[index new create],path:"konular",path_names:{edit:"düzenle"}
+  resources :topics,except:%i[index new create],path:"konular",path_names:{edit:"düzenle"} do
+    resources :comments,only:%i[ new create ],path:"Yorumlar",path_names:{new:"yeni"}
+    resources :comments,only:%i[ edit update destroy ],path:"Yorumlar",path_names:{edit:"Düzenle"}
+  end
 
   resources :users,only:%i[ create update destroy]
 
