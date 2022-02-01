@@ -1,9 +1,10 @@
 class CommentsController < ApplicationController
+	before_action :select_comment,only:%i[ edit update destroy ]
+
 	before_action :validate_user!
 	before_action only:%i[ edit update destroy ] do
 		validate_permission!(select_comment.user)
 	end
-	before_action :select_comment,only:%i[ edit update destroy ]
 	def new
 		@topic = Topic.find(params[:topic_id])
 		@comment = @topic.comments.new
@@ -18,6 +19,21 @@ class CommentsController < ApplicationController
 		else
 			render :new
 		end
+	end
+
+	def update
+		if @comment.update(comment_params)
+			redirect_to @comment.topic,notice:"Yorumunuz başarıyla güncellendi"
+		else
+			render :edit
+		end
+		#render :edit
+	end
+
+	def destroy
+		@comment.destroy
+		flash[:notice] = "Yorumunuz başarıyla silindi"
+		redirect_to @comment.topic
 	end
 	private
 	def comment_params

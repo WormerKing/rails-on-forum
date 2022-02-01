@@ -12,7 +12,7 @@
 			<%= time_ago_in_words topic.created_at%> önce gönderildi
 		</small>
 		<div class="col-sm-2 text-center">
-			<strong>n</strong><br>Yanıt
+			<strong><%= topic.comments.count%></strong><br>Yanıt
 		</div>
 	</div>
 </div>
