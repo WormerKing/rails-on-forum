@@ -1,6 +1,9 @@
 class SessionsController < ApplicationController
   def new
-    
+    if signed_in?
+      flash[:warning] = "Zaten giriş yapmışsınız"
+      redirect_to "/"
+    end
   end
 
   def create
@@ -16,7 +19,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    logout  
     redirect_to "/",notice:"Oturumunuz sonlandırıldı"
   end
 end

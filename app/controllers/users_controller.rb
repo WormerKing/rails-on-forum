@@ -5,6 +5,10 @@ class UsersController < ApplicationController
 	end
 	rescue_from ActiveRecord::RecordNotFound,with: :load_error_page
 	def new
+		if signed_in?
+			flash[:warning] = "Zaten giriş yapmışsınız"
+			redirect_to "/"
+		end
 		@user = User.new
 	end
 	
@@ -17,7 +21,7 @@ class UsersController < ApplicationController
 
 		if @user.update(user_params)
 			flash[:notice] = "Profil bilgileriniz güncellendi"
-			redirect_to @user
+			redirect_to(profile_path(@user))
 		else
 			render :edit,layout:"profile"
 		end
@@ -38,7 +42,7 @@ class UsersController < ApplicationController
 		if @user.save
 			login(@user)
 			flash[:notice] = "Kayıt başarıyla eklendi :)"
-			redirect_to(@user)
+			redirect_to(profile_path(@user))
 		else
 			render :new
 		end
@@ -57,6 +61,7 @@ class UsersController < ApplicationController
 	end
 
 	def destroy
+		logout
 		@user.destroy
 		flash[:warning] = "Hesabınız başarıyla silindi"
 		redirect_to register_path

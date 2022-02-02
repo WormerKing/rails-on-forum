@@ -6,7 +6,7 @@
 
 		<% if current_user == comment.user%>
 			<%= link_to "Düzenle",edit_comment_path(comment)%>
-			<%= link_to "Sil","/konular/#{comment.topic.id}/Yorumlar/#{comment.id}",method: :delete%>
+			<%= link_to "Sil",comment,method: :delete%>
 		<%end%>
 	</small>
 </div>

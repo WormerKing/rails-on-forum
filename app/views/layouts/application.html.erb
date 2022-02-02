@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>
-      <%= content_for?(:title_content) ? yield(:title_content) : "Ruby on Forum"%>
+      <%= content_for?(:title) ? yield(:title) : "Ruby on Forum"%>
     </title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
