@@ -1,13 +1,7 @@
 <div class="row">
 	<h1><%= @topic.title%></h1>
-	<p><%= @topic.body%></p>
-	<small class="details">
-		<span class="forum-name">
-			<%= link_to @topic.forum.name,@topic.forum%>
-		</span>
-		<%= link_to_unless_current @topic.user.username,profile_path(@topic.user)%>
-		Tarafından <%= time_ago_in_words @topic.created_at%> önce gönderildi.
-	</small>
+	<p><%= markdown @topic.body%></p>
+	<%= topic_info(@topic)%>
 </div>
 <div class="row">
 	<%= link_to "Yorum ekle",new_topic_comment_path(@topic),class:"btn btn-primary" if signed_in?%>

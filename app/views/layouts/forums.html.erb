@@ -1,10 +1,12 @@
 <% content_for(:content) do%>
 	<%= stylesheet_link_tag "forums"%>
 	<div class="row">
-		<div class="col-lg-3 border itele" style="background:#ff3333;">
-			<h3>Forumlar</h3>
-			<div class="row">
-				<%= render partial:"layouts/forum",locals:{forumlar:@forumlar}%>
+		<div class="col-lg-3 itele">
+			<div class="renklendir">
+				<h3>Forumlar</h3>
+				<div class="row">
+					<%= render partial:"layouts/forum",locals:{forumlar:@forumlar}%>
+				</div>
 			</div>
 		</div>
 		<div class="col-lg-8 itele border">
