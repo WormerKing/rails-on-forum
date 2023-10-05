@@ -12,10 +12,13 @@
 
 ActiveRecord::Schema.define(version: 2022_02_02_124605) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "comments", force: :cascade do |t|
     t.text "body", null: false
-    t.integer "user_id", null: false
-    t.integer "topic_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "topic_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["topic_id"], name: "index_comments_on_topic_id"
@@ -30,8 +33,8 @@ ActiveRecord::Schema.define(version: 2022_02_02_124605) do
   create_table "topics", force: :cascade do |t|
     t.string "title", null: false
     t.text "body", null: false
-    t.integer "user_id", null: false
-    t.integer "forum_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "forum_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "comments_count", default: 0

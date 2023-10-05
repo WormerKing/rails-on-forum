@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+    web:
+        build: .
+        command: /bin/sh script.sh
+        volumes:
+            - .:/app
+        environment:
+            - DATABASE_HOST=172.66.5.0
+        depends_on:
+            - db
+        ports:
+            - "3000:3000"
+        networks:
+            - rails-forum
+    
+    db:
+        image: postgres
+        volumes:
+            - ./tmp/db:/var/postgresql/data
+        environment:
+            - POSTGRES_USER=wormer
+            - POSTGRES_PASSWORD=wormer
+            - POSTGRES_DB=rails_forum
+        networks:
+            - rails-forum
+
+networks:
+    rails-forum:
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.66.0.0/16
+                  ip_range: 172.66.5.0/24
+                  gateway: 172.66.5.254
